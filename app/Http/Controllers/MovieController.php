@@ -27,5 +27,10 @@ class MovieController extends Controller
         }
         return $movie;
     }
-
+    public function movie($id){
+        $movie = Movie::where("id",$id)->get();
+        if (empty($movie)||empty($movie[0]))return abort(404);
+        $schedules = $movie[0]->schedules;
+        return view("moviePage",["movie"=>$movie[0],"schedules"=>$schedules]);
+    }
 }
