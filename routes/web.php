@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\PracticeController;
+use App\Http\Controllers\MovieController;
+use App\Http\Controllers\AdminMovieController;
 use Illuminate\Support\Facades\Route;
+
 /*
 |-------------------------------------------------------------------------
 | Web Routes
@@ -15,3 +19,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/practice', [PracticeController::class, 'sample']);
+Route::get('/practice2', [PracticeController::class, 'sample2']);
+Route::get('/practice3', [PracticeController::class, 'sample3']);
+Route::get('/getPractice', [PracticeController::class, 'getPractice']);
+
+Route::get('/movies', [MovieController::class, 'index']);
+Route::get('/admin/movies', [AdminMovieController::class, 'index']);
+Route::get('/admin/movies/create', [AdminMovieController::class, 'create']);
+Route::post('/admin/movies/store', [AdminMovieController::class, 'store']);
+Route::get('/admin/movies/{id}/edit', [AdminMovieController::class, 'edit']);
+Route::patch('/admin/movies/{id}/update', [AdminMovieController::class, 'update']);
