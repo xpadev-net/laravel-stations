@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("movie_id")->comment("列");
-            $table->time("start_time")->comment("上映開始時刻");
-            $table->time("end_time")->comment("上映終了時刻");
+            $table->datetime("start_time")->comment("上映開始時刻");
+            $table->datetime("end_time")->comment("上映終了時刻");
             $table->timestamps();
             $table->foreign("movie_id")->references("id")->on("movies");
         });

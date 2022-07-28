@@ -25,6 +25,11 @@ class AdminMovieController extends Controller
         $movie[0]->delete();
         return redirect("/");
     }
+    public function item($id){
+        $movie = Movie::where('id',$id)->get();
+        if (empty($movie))return App::abort("404");
+        return view("adminMoviePage",["movie"=>$movie[0]]);
+    }
     public function update(Request $request,$id){
         $vaildate = $request->validate([
             'title'=>["required","unique:App\Models\Movie,title"],
