@@ -13,8 +13,8 @@
 <div>{{$movie->description}}</div>
 <ul>
     @foreach ($schedules as $schedule)
-        <p>{{mb_substr($schedule->start_time,-8,5)}}</p>
-        <p>{{mb_substr($schedule->end_time,-8,5)}}</p>
+        <p>{{$schedule->start_time->format('h:m')}}</p>
+        <p>{{$schedule->end_time->format('h:m')}}</p>
     @endforeach
 </ul>
 </body>
