@@ -39,6 +39,10 @@ Route::get('/sheets', [SheetController::class, 'index']);
 
 Route::get('/movies/{id}', [MovieController::class, 'movie']);
 
+Route::get('/movies/{id}/schedules/{schedule}/sheets', [SheetController::class, 'sheets']);
+Route::get('/movies/{id}/schedules/{schedule}/reservations/create', [SheetController::class, 'reserveCreate']);
+Route::post('/reservations/store', [SheetController::class, 'reserveStore']);
+
 Route::get('/admin/movies/{id}/schedules/create', [AdminScheduleController::class, 'create']);
 Route::post('/admin/movies/{id}/schedules/store', [AdminScheduleController::class, 'store']);
 Route::get('/admin/schedules', [AdminScheduleController::class, 'index']);

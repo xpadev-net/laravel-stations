@@ -15,6 +15,7 @@
     @foreach ($schedules as $schedule)
         <p>{{$schedule->start_time->format('h:m')}}</p>
         <p>{{$schedule->end_time->format('h:m')}}</p>
+        <p>座席を予約する</p>
     @endforeach
 </ul>
 </body>

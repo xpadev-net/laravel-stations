@@ -47,7 +47,7 @@ class SheetTest extends TestCase
     public function test座席予約画面が表示されるか(): void
     {
         [$movieId, $scheduleId] = $this->createMovieAndSchedule();
-        $response = $this->get('/movies/'.$movieId.'/schedules/'.$scheduleId.'/sheets?date='.CarbonImmutable::now());
+        $response = $this->get('/movies/'.$movieId.'/schedules/'.$scheduleId.'/sheets?date='.CarbonImmutable::now()->format('Y-m-d'));
         $response->assertStatus(200);
     }
 
@@ -67,7 +67,7 @@ class SheetTest extends TestCase
     public function test予約ページが表示されるか(): void
     {
         [$movieId, $scheduleId] = $this->createMovieAndSchedule();
-        $response = $this->get('/movies/'.$movieId.'/schedules/'.$scheduleId.'/reservations/create?date='.CarbonImmutable::now().'&sheetId='.Sheet::first()->id);
+        $response = $this->get('/movies/'.$movieId.'/schedules/'.$scheduleId.'/reservations/create?date='.CarbonImmutable::now()->format('Y-m-d').'&sheetId='.Sheet::first()->id);
         $response->assertStatus(200);
     }
 
@@ -133,7 +133,7 @@ class SheetTest extends TestCase
             'sheet_id' => Sheet::first()->id,
             'name' => '予約者氏名',
             'email' => "techbowl@techbowl.com",
-            'date' => CarbonImmutable::now()->format('Y-m-d'),
+            'screening_date' => CarbonImmutable::now()->format('Y-m-d'),
         ]);
         $this->assertReservationCount(1);
         $response = $this->post('/reservations/store', [
@@ -158,7 +158,7 @@ class SheetTest extends TestCase
             'sheet_id' => Sheet::first()->id,
             'name' => '予約者氏名',
             'email' => "techbowl@techbowl.com",
-            'date' => CarbonImmutable::now()->format('Y-m-d'),
+            'screening_date' => CarbonImmutable::now()->format('Y-m-d'),
         ]);
         $this->assertReservationCount(1);
         try {
@@ -167,7 +167,7 @@ class SheetTest extends TestCase
                 'sheet_id' => Sheet::first()->id,
                 'name' => '予約者氏名',
                 'email' => "techbowl@techbowl.com",
-                'date' => CarbonImmutable::now()->format('Y-m-d'),
+                'screening_date' => CarbonImmutable::now()->format('Y-m-d'),
             ]);
             $this->fail();
         } catch (\Exception $e) {
