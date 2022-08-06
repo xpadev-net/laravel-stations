@@ -51,8 +51,8 @@ class ScheduleTest extends TestCase
         $response->assertStatus(200);
 
         foreach ($movie->schedules as $schedule) {
-            $response->assertSeeText(mb_substr($schedule->start_time,-8,5));
-            $response->assertSeeText(mb_substr($schedule->end_time,-8,5));
+            $response->assertSeeText($schedule->start_time->format('h:m'));
+            $response->assertSeeText($schedule->end_time->format('h:m'));
         }
     }
 
