@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reservation extends Model
 {
     use HasFactory;
+    public function schedule(){
+        return $this->belongsTo('App\Models\Schedule');
+    }
 }

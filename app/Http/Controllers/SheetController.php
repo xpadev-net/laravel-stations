@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Models\Reservation;
+use App\Models\Schedule;
 use App\Models\Sheet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -20,8 +21,19 @@ class SheetController extends Controller
         $validator = Validator::make($request->all(),[
             'date'=>["required","date_format:Y-m-d"],
         ]);
-        if ($validator->fails())abort(400);
-        return view("practice");
+        $schedule = Schedule::find($schedule);
+        if ($validator->fails()||empty($schedule))abort(400);
+        $sheets = Sheet::all()->toArray();
+        foreach ($schedule->reservation as $reservation) {
+            foreach ($sheets as $key=>$item) {
+                if ($item["id"]===$reservation["sheet_id"])$sheets[$key]["reserved"] = true;
+            }
+        }
+        $sheets = array_reduce($sheets,function (array $groups, $sheet) {
+            $groups[$sheet["row"]][] = $sheet;
+            return $groups;
+        },[]);
+        return view("sheetReserve",["sheets"=>$sheets]);
     }
     public function reserveCreate(Request $request){
         $validator = Validator::make($request->all(),[

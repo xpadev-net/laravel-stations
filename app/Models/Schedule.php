@@ -9,4 +9,8 @@ class Schedule extends Model
 {
     use HasFactory;
     protected $dates = ['start_time','end_time'];
+    public function reservation()
+    {
+        return $this->hasMany('App\Models\Reservation');
+    }
 }
