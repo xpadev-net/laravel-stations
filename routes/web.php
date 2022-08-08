@@ -5,6 +5,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\AdminMovieController;
 use App\Http\Controllers\AdminScheduleController;
 use App\Http\Controllers\SheetController;
+use App\Http\Controllers\AdminReservationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,4 +51,6 @@ Route::get('/admin/schedules/{id}', [AdminScheduleController::class, 'edit']);
 Route::get('/admin/schedules/{id}/edit', [AdminScheduleController::class, 'edit']);
 Route::patch('/admin/schedules/{id}/update', [AdminScheduleController::class, 'update']);
 Route::delete('/admin/schedules/{id}/destroy', [AdminScheduleController::class, 'destroy']);
+
+Route::get('/admin/reservations/', [AdminReservationController::class, 'index']);
 
